@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Video Portal</title>
+
+ 
+
+  <style>
+    [x-cloak] { display: none !important; }
+    .flash {
+      animation: flash 0.2s ease-in-out;
+    }
+    @keyframes flash {
+      0% { background-color: rgba(255, 255, 255, 0.3); }
+      100% { background-color: transparent; }
+    }
+  </style>
+</head>
+<body class="transition-colors">
+
+  <!-- Navbar -->
+  <header class="flex justify-between items-center p-4 shadow-md bg-white dark:bg-gray-800">
+    <h1 class="text-xl font-bold">My Video Site</h1>
+    <div class="space-x-2">
+      <button id="themeToggle" class="px-4 py-2 bg-gray-700 text-white rounded-md">Toggle Theme</button>
+      <button onclick="openPlanModal()" class="px-4 py-2 bg-blue-600 text-white rounded-md">Upgrade Plan</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 p-4">
+
+    <!-- Sidebar -->
+    <aside class="lg:col-span-1 space-y-4">
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+        <h2 class="text-lg font-semibold mb-2">Groups</h2>
+        <input type="text" placeholder="Search groups..." class="w-full p-2 border rounded-md">
+        <ul class="mt-2 space-y-1 text-sm text-gray-700 dark:text-gray-300">
+          <li># DevTalk</li>
+          <li># MovieLovers</li>
+        </ul>
+        <button class="mt-3 w-full px-2 py-1 bg-green-600 text-white rounded-md">+ Create Group</button>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+        <h2 class="text-lg font-semibold mb-2">Downloads</h2>
+        <ul class="text-sm space-y-1">
+          <li>🎥 myvideo1.mp4</li>
+          <li>🎥 devtalk-clip.mp4</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Panel -->
+    <main class="lg:col-span-3 space-y-4">
+
+      <!-- Video Player -->
+      <div class="bg-black rounded-xl overflow-hidden relative">
+        <video id="videoPlayer" class="w-full" src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
+      </div>
+
+      <!-- Comments -->
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+        <h2 class="text-lg font-semibold mb-4">Comments</h2>
+        <div id="commentSection" class="space-y-4"></div>
+        <form id="commentForm" class="mt-4 space-y-2">
+          <textarea id="commentInput" class="w-full p-2 border rounded-md" rows="2" placeholder="Write your comment in any language..."></textarea>
+          <button class="px-4 py-2 bg-blue-600 text-white rounded-md">Post Comment</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- Plan Modal -->
+  <div id="planModal" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl space-y-4 shadow-xl w-full max-w-sm">
+      <h2 class="text-xl font-semibold">Choose a Plan</h2>
+      <div class="space-y-2">
+        <button onclick="payPlan('Bronze', 10)" class="w-full py-2 bg-yellow-500 text-white rounded">Bronze - ₹10</button>
+        <button onclick="payPlan('Silver', 50)" class="w-full py-2 bg-gray-500 text-white rounded">Silver - ₹50</button>
+        <button onclick="payPlan('Gold', 100)" class="w-full py-2 bg-orange-600 text-white rounded">Gold - ₹100</button>
+      </div>
+      <button onclick="closePlanModal()" class="text-sm text-red-500">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Download Button -->
+  <button onclick="attemptDownload()" class="mt-4 mx-4 px-4 py-2 bg-green-600 text-white rounded-md">
+    ⬇ Download Video
+  </button>
+
+  <!-- Download Modal -->
+  <div id="downloadModal" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-96">
+      <h2 class="text-xl font-semibold mb-4">Upgrade to Premium</h2>
+      <p>You’ve reached your daily download limit. Get unlimited downloads by upgrading.</p>
+      <div class="mt-4 flex space-x-2">
+        <button onclick="payForPremium()" class="flex-1 bg-yellow-500 text-white py-2 rounded">Pay ₹50</button>
+        <button onclick="closeDownloadModal()" class="flex-1 bg-red-500 text-white py-2 rounded">Cancel</button>
+      </div>
+    </div>
+  </div>
+ <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+ <script src="main.js"></script>
+</body>
+</html>
